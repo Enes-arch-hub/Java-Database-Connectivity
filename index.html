@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>JDBC Documentation</title>
+  </head>
+  <body>
+    <header>
+      <h1>Java Database Connectivity (JDBC) Documentation</h1>
+    </header>
+
+    <main>
+      <h2>What is JDBC?</h2>
+      <p>
+        JDBC (Java Database Connectivity) is an API in Java that enables
+        applications to connect to relational databases, execute SQL queries,
+        and retrieve or manipulate data. It serves as a
+        <strong>bridge between Java code and the database</strong>.
+      </p>
+
+      <h2>JDBC Workflow Overview</h2>
+      <ol>
+        <li>Load the JDBC Driver</li>
+        <li>Establish a Connection to the Database</li>
+        <li>Create and Execute SQL Statements</li>
+        <li>Process Returned Results</li>
+        <li>Close the Connection</li>
+      </ol>
+
+      <h2>Project Setup</h2>
+      <p>Add JDBC Driver (Example for MySQL/MariaDB using Maven):</p>
+      <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+    &lt;version&gt;8.3.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+      <h2>Basic JDBC Example</h2>
+      <pre><code>import java.sql.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/schooldb";
+        String username = "root";
+        String password = "your_password";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, username, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + "  " + rs.getString("name"));
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+      <h2>Using PreparedStatement</h2>
+      <pre><code>String sql = "INSERT INTO students(name, age) VALUES (?, ?)";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, "Denis");
+ps.setInt(2, 21);
+ps.executeUpdate();</code></pre>
+
+      <h2>Common JDBC Classes</h2>
+      <ul>
+        <li>
+          <strong>DriverManager</strong>: Manages database drivers and
+          connections
+        </li>
+        <li>
+          <strong>Connection</strong>: Represents an active database connection
+        </li>
+        <li><strong>Statement</strong>: Executes SQL queries</li>
+        <li>
+          <strong>PreparedStatement</strong>: Executes parameterized SQL queries
+        </li>
+        <li>
+          <strong>ResultSet</strong>: Stores and provides access to returned
+          data
+        </li>
+      </ul>
+
+      <h2>CRUD Operations</h2>
+      <p>Examples for Create, Read, Update, Delete using JDBC.</p>
+
+      <h3>Create</h3>
+      <pre><code>String sql = "INSERT INTO users(name,email) VALUES(?,?)";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, "John");
+ps.setString(2, "john@email.com");
+ps.executeUpdate();</code></pre>
+
+      <h3>Read</h3>
+      <pre><code>ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+while (rs.next()) {
+    System.out.println(rs.getString("name"));
+}</code></pre>
+
+      <h3>Update</h3>
+      <pre><code>String sql = "UPDATE users SET name=? WHERE id=?";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, "New Name");
+ps.setInt(2, 1);
+ps.executeUpdate();</code></pre>
+
+      <h3>Delete</h3>
+      <pre><code>String sql = "DELETE FROM users WHERE id=?";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setInt(1, 1);
+ps.executeUpdate();</code></pre>
+
+      <h2>Closing Connections</h2>
+      <p>Always close connections to avoid memory leaks:</p>
+      <pre><code>con.close();</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        JDBC is a powerful API that forms the foundation for interacting with
+        relational databases in Java. MariaDB can be used as a replacement for
+        MySQL on Kali Linux, fully compatible with JDBC.
+      </p>
+    </main>
+  </body>
+</html>
