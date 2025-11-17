@@ -1,6 +1,6 @@
 # Java Database Connectivity (JDBC) Documentation
 
-This README provides a clear introduction to **Java Database Connectivity (JDBC)**, how it works, and examples you can use when building Java applications that interact with databases such as MySQL, PostgreSQL, and SQLite.
+This README provides a clear introduction to **Java Database Connectivity (JDBC)**, how it works, and examples you can use when building Java applications that interact with databases such as MariaDB, MySQL, PostgreSQL, SQLite, and H2.
 
 ---
 
@@ -8,7 +8,7 @@ This README provides a clear introduction to **Java Database Connectivity (JDBC)
 
 JDBC (Java Database Connectivity) is an API in Java that enables applications to connect to relational databases, execute SQL queries, and retrieve or manipulate data.
 
-It serves as a **bridge between Java code and the database**.
+It serves as a **bridge between Java code and the database**, allowing seamless communication.
 
 ---
 
@@ -22,13 +22,13 @@ JDBC works in these main steps:
 4. **Process Returned Results**
 5. **Close the Connection**
 
-This provides a consistent way to interact with different databases.
+This workflow is consistent across different database systems.
 
 ---
 
 ## 🔧 Project Setup
 
-### Add JDBC Driver (MySQL Example)
+### Add JDBC Driver (Example for MariaDB/MySQL)
 
 If using Maven, add this dependency:
 
@@ -39,6 +39,8 @@ If using Maven, add this dependency:
     <version>8.3.0</version>
 </dependency>
 ```
+
+> Note: This works for both MySQL and MariaDB.
 
 ### Typical JDBC URL Format
 
@@ -56,8 +58,6 @@ jdbc:mysql://localhost:3306/schooldb
 
 ## 🚀 Basic JDBC Example
 
-Below is a simple Java program demonstrating a full JDBC workflow.
-
 ```java
 import java.sql.*;
 
@@ -65,7 +65,7 @@ public class Main {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/schooldb";
         String username = "root";
-        String password = "";
+        String password = "your_password";
 
         try {
             // 1. Load and Register Driver
@@ -100,7 +100,7 @@ public class Main {
 
 ## 🔐 Using PreparedStatement (Recommended)
 
-`PreparedStatement` is safer and prevents SQL Injection.
+`PreparedStatement` prevents SQL injection and is more efficient for repeated queries.
 
 ```java
 String sql = "INSERT INTO students(name, age) VALUES (?, ?)";
@@ -178,9 +178,37 @@ con.close();
 
 ---
 
+## **2. How to Run**
+
+1. Clone the repository:
+
+```bash
+git clone <https://github.com/Denis-7242/Java-Database-Connectivity.git>
+```
+
+2. Navigate into the project:
+
+```bash
+cd Java database connectivity
+```
+
+> Make sure your MySQL/MariaDB server is running and `schooldb` database exists.
+
+---
+
+## **3. Contribution Guidelines**
+
+* Fork the repository.
+* Create a new branch for your feature: `git checkout -b feature-name`
+* Commit your changes: `git commit -m "Add feature"`
+* Push to your branch: `git push origin feature-name`
+* Open a Pull Request.
+
+---
+
 ## 🏁 Conclusion
 
-JDBC is a powerful and essential API for interacting with relational databases in Java. It provides the foundation for more advanced frameworks like Hibernate and Spring Data.
+JDBC is a powerful API for interacting with relational databases in Java. It provides the foundation for more advanced frameworks like Hibernate and Spring Data.
 
 This documentation covers:
 
@@ -189,7 +217,7 @@ This documentation covers:
 * CRUD examples
 * Best practices
 
-You can now expand this README with your custom project details.
+> ✅ Note: On Kali Linux, MariaDB is a recommended MySQL replacement, fully compatible with JDBC.
 
 ---
 
