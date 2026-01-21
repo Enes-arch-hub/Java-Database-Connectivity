@@ -221,12 +221,4 @@ This documentation covers:
 
 ---
 
-## 📜 License
-
-This project is open-source. Feel free to modify and use it as needed.
-
-# JDBC Regards
-
-This is a simple Java Database Connectivity (JDBC) demonstration project.
-
-Made with ❤️ by Denis.
+.
